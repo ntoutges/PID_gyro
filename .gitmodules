@@ -1,0 +1,3 @@
+[submodule "lib/csch"]
+	path = lib/csch
+	url = git@github.com:ntoutges/csch.git
