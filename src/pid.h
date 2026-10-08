@@ -9,6 +9,7 @@
  */
 
 #include <stdint.h>
+#include <math.h>
 
 // Make C/C++ compatible
 #ifdef __cplusplus
