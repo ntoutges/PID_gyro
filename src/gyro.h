@@ -20,7 +20,7 @@ extern csch_t sched;
  * Initialize the motor task
  * Expects global `csch_t sched` to already be initialized and ready-to-use
  */
-void motor_init();
+void gyro_init();
 
 /**
  * The main gyro task. Add this to the `csch` scheduled tasks to begin running
