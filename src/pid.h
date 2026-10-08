@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-typedef struct pid_t {
+typedef struct cpid_t {
     
     // PID coefficients
     float kp, ki, kd;
@@ -35,7 +35,7 @@ typedef struct pid_t {
     // Iff 0: assume the PID loop hasn't been run before
     uint32_t last_tick;
 
-} pid_t;
+} cpid_t;
 
 /**
  * Create a new PID object
@@ -45,7 +45,7 @@ typedef struct pid_t {
  * @param kd The D coefficient
  * @returns The created PID object, ready for ticking
  */
-pid_t pid_create(float kp, float ki, float kd);
+cpid_t pid_create(float kp, float ki, float kd);
 
 /**
  * Run a single cycle of the PID loop
@@ -60,28 +60,28 @@ pid_t pid_create(float kp, float ki, float kd);
  * Arduino framework's `micros()` function
  * @returns The computed value from this iteration of the PID loop
  */
-float pid_tick(pid_t* pid, float error, uint32_t tmicros);
+float cpid_tick(cpid_t* pid, float error, uint32_t tmicros);
 
 /**
  * Set the P coefficient of a given PID object
  * @param pid The PID object to update
  * @param kp The P coefficient
  */
-void pid_p(pid_t* pid, float kp);
+void pid_p(cpid_t* pid, float kp);
 
 /**
  * Set the I coefficient of a given PID object
  * @param pid The PID object to update
  * @param ki The I coefficient
  */
-void pid_i(pid_t* pid, float ki);
+void pid_i(cpid_t* pid, float ki);
 
 /**
  * Set the D coefficient of a given PID object
  * @param pid The PID object to update
  * @param kd The D coefficient
  */
-void pid_d(pid_t* pid, float kd);
+void pid_d(cpid_t* pid, float kd);
 
 /**
  * Reset the state of the PID loop
@@ -94,7 +94,7 @@ void pid_d(pid_t* pid, float kd);
  * 
  * @param pid The PID object to reset the state of
  */
-void pid_reset(pid_t* pid);
+void pid_reset(cpid_t* pid);
 
 /**
  * Cap integrator term at some maximum value
@@ -103,7 +103,7 @@ void pid_reset(pid_t* pid);
  * @param pid The PID object to modify
  * @param max The maximum error we can accumulate before being capped
  */
-void pid_imax(pid_t* pid, float max);
+void pid_imax(cpid_t* pid, float max);
 
 #ifdef __cplusplus
 }

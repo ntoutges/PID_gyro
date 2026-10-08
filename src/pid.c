@@ -1,7 +1,7 @@
 #include "pid.h"
 
-pid_t pid_create(float kp, float ki, float kd) {
-    return (pid_t) {
+cpid_t pid_create(float kp, float ki, float kd) {
+    return (cpid_t) {
         // Initialize coefficients
         .kp = kp,
         .ki = ki,
@@ -19,7 +19,7 @@ pid_t pid_create(float kp, float ki, float kd) {
     };
 }
 
-float pid_tick(pid_t* pid, float error, uint32_t tmicros) {
+float cpid_tick(cpid_t* pid, float error, uint32_t tmicros) {
     float p, i, d; // :)
 
     // Compute delta time, in s
@@ -58,24 +58,24 @@ float pid_tick(pid_t* pid, float error, uint32_t tmicros) {
     return p + i + d;
 }
 
-void pid_p(pid_t* pid, float kp) {
+void pid_p(cpid_t* pid, float kp) {
     pid->kp = kp;
 }
 
-void pid_i(pid_t* pid, float ki) {
+void pid_i(cpid_t* pid, float ki) {
     pid->kp = ki;
 }
 
-void pid_d(pid_t* pid, float kd) {
+void pid_d(cpid_t* pid, float kd) {
     pid->kp = kd;
 }
 
-void pid_reset(pid_t* pid) {
+void pid_reset(cpid_t* pid) {
     pid->last_error = 0;
     pid->acc = 0;
     pid->last_tick = 0;
 }
 
-void pid_imax(pid_t* pid, float max) {
+void pid_imax(cpid_t* pid, float max) {
     pid->acc_max = max;
 }
