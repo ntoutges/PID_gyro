@@ -1,3 +1,6 @@
 [submodule "lib/csch"]
 	path = lib/csch
 	url = git@github.com:ntoutges/csch.git
+[submodule "lib/rval"]
+	path = lib/rval
+	url = git@github.com:ntoutges/rval.git
