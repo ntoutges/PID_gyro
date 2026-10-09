@@ -60,7 +60,7 @@ cpid_t pid_create(float kp, float ki, float kd);
  * Arduino framework's `micros()` function
  * @returns The computed value from this iteration of the PID loop
  */
-float cpid_tick(cpid_t* pid, float error, uint32_t tmicros);
+float pid_tick(cpid_t* pid, float error, uint32_t tmicros);
 
 /**
  * Set the P coefficient of a given PID object

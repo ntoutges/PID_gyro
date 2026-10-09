@@ -19,7 +19,7 @@ cpid_t pid_create(float kp, float ki, float kd) {
     };
 }
 
-float cpid_tick(cpid_t* pid, float error, uint32_t tmicros) {
+float pid_tick(cpid_t* pid, float error, uint32_t tmicros) {
     float p, i, d; // :)
 
     // Compute delta time, in s

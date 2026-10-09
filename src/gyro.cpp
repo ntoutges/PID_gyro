@@ -16,7 +16,6 @@ uint16_t _gyro_cal_cycle_ct = 0; // Number of cycles of calibration performed
 float _gyro_cal_acc = 0; // Gyro accumulator
 
 void gyro_init() {
-    Wire.begin();
     csch_task_fork(&sched, t_gyro);
 }
 
