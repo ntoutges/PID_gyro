@@ -56,7 +56,9 @@ void setup() {
 
     // Initialize submodules
     motor_init();
-    gyro_init();
+    // gyro_init();
+
+    csch_task_fork(&sched, t_test);
 
     // @TODO: Fill kp, ki, kd, with real values
     pid = pid_create(0, 0, 0);
@@ -73,8 +75,12 @@ void setup() {
 void loop() {}
 
 void t_test() {
+    csch_cqueue(100);
+
     while (Serial.available()) {
-        cmd_recv(&shell, Serial.read());
+        char c = Serial.read();
+        cmd_recv(&shell, c);
+        Serial.print(c);
     }
 }
 
@@ -83,4 +89,6 @@ bool onSet(rval_key_view_t key) {
     // Assume `s` was updated...
     int16_t s = rval_get_i(&rv, "s");
     motor_set(s);
+
+    return true;
 }

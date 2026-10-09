@@ -20,12 +20,13 @@
 
 #define MOTOR_PULSE_THRESH 70   // Below threshold, quick pulse is applied to start motor
 #define MOTOR_PULSE_MS 50       // Length of starting impulse
-#define MOTOR_PULSE_AMP 75      // Amplitude of starting impulse
+#define MOTOR_PULSE_AMP 70      // Amplitude of starting impulse
+#define MOTOR_MIN_SPEED 30      // Minimum sustainable PWM value
 
 typedef enum motor_state_t {
-    MOTOR_S_INIT,   // Initialize module
-    MOTOR_S_IDLE,   // Idle state, motors running normally
-    MOTOR_S_PULSE   // Running through pulse
+    MOTOR_S_IDLE,           // Idle state, motors running normally
+    MOTOR_S_PULSE_START,    // Start pulse
+    MOTOR_S_PULSE_STOP      // Stop pulse
 } motor_state_t;
 
 
