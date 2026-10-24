@@ -6,7 +6,7 @@
 #include <rval.h>
 
 extern csch_t sched;
-extern cmd_t cmd;
+extern cmd_t shell;
 
 void debug_init();
 

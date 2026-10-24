@@ -35,6 +35,7 @@ void setup() {
 
     Wire.begin();
     Wire.setTimeout(50);
+    // Wire.setClock(10000);
     
     // Initialize scheduler
     sched = csch_create(1, millis, proc_buf, sizeof(proc_buf) / sizeof(*proc_buf));
