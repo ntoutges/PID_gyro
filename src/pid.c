@@ -25,7 +25,7 @@ float pid_tick(cpid_t* pid, float error, uint32_t tmicros) {
     // Compute delta time, in s
     float dtime = pid->last_tick == 0
         ? 0 // We haven't run before; Cannot trust this value
-        : (tmicros - pid->last_error) / 1e6; // Standard delta time computation
+        : (tmicros - pid->last_tick) / 1e6; // Standard delta time computation
     
     // Track when we last ran
     pid->last_tick = tmicros;
@@ -63,11 +63,11 @@ void pid_p(cpid_t* pid, float kp) {
 }
 
 void pid_i(cpid_t* pid, float ki) {
-    pid->kp = ki;
+    pid->ki = ki;
 }
 
 void pid_d(cpid_t* pid, float kd) {
-    pid->kp = kd;
+    pid->kd = kd;
 }
 
 void pid_reset(cpid_t* pid) {

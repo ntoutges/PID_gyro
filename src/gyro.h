@@ -30,7 +30,7 @@ typedef enum gyro_state_t {
 } gyro_state_t;
 
 /**
- * Initialize the motor task
+ * Initialize the gyro task
  * Expects global `csch_t sched` to already be initialized and ready-to-use
  */
 void gyro_init();
