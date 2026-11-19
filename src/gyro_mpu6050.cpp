@@ -1,4 +1,28 @@
+#include "setup.h"
 #include "gyro.h"
+
+/**
+ * @file gyro_mpu6050.cpp
+ * @author Nicholas T. (ntoutges@gmail.com)
+ * @brief Assume connected gyro is th MPU6050; Integrate rotational velocity for rotation
+ * @version 0.1
+ * @date 2026-11-19
+ * 
+ * @copyright Copyright (c) 2026
+ * 
+ */
+
+// Compile IFF using MPU6050 as gyro
+#if GYRO_USE_MPU6050
+
+#include <MPU6050.h>
+
+typedef enum gyro_state_t {
+    GYRO_S_INIT,  // Initializing module
+    GYRO_S_BEGIN, // Attempting to verify MPU6050 is avaiable
+    GYRO_S_IDLE,  // Poll MPU6050 for rotational data
+    GYRO_S_CAL    // Running calibration
+} gyro_state_t;
 
 uint32_t _gyro_last_tick = 0;
 gyro_state_t _gyro_state = GYRO_S_INIT;
@@ -158,3 +182,5 @@ void gyro_calibration(float value) {
 float gyro_get_calibration() {
     return _gyro_cal_acc;
 }
+
+#endif

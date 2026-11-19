@@ -50,7 +50,7 @@ float pid_tick(cpid_t* pid, float error, uint32_t tmicros) {
     float derror = dtime == 0
         ? 0 // Invalid dtime; Ignore
         : (error - pid->last_error) / dtime; // Differentiate error
-    d = pid->ki * derror;
+    d = pid->kd * derror;
 
     pid->last_error = error;
 

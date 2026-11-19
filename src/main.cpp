@@ -34,11 +34,11 @@ void a_start(void*);
 void a_stop(void*);
 
 void setup() {
+    delay(5000);
     Serial.begin(115200); // Obvious debug data is obvious
 
     Wire.begin();
-    Wire.setTimeout(50);
-    Wire.setClock(10000);
+    // Wire.setTimeout(50);
     
     // Initialize scheduler
     sched = csch_create(1, millis, proc_buf, sizeof(proc_buf) / sizeof(*proc_buf));
@@ -86,6 +86,8 @@ void setup() {
     rval_decl_f(&rv, "out", false);
     rval_decl_f(&rv, "err", false);
 
+    rval_decl_i8(&rv, "lpt", false); // What to print
+
     cmd_attach(&shell, "start", a_start, NULL);
     cmd_attach(&shell, "stop", a_stop, NULL);
 
@@ -129,9 +131,12 @@ void t_controller() {
 // Value rate-limited to avoid costly update each controller cycle
 void t_updater() {
     csch_cqueue(csch_cms_to_ticks(100));
-    rval_set_f(&rv, "out", system_out);
-    rval_set_f(&rv, "err", error);
-    rval_set_i(&rv, "crot", gyro_read());
+
+    int8_t lpt = rval_get_i(&rv, "lpt");
+    if (lpt & 0x01) rval_set_i(&rv, "crot", gyro_read());
+    if (lpt & 0x02) rval_set_f(&rv, "err", error);
+    if (lpt & 0x04) rval_set_f(&rv, "out", system_out);
+
 }
 
 bool onSet(rval_key_view_t key) {
