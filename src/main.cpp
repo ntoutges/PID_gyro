@@ -34,11 +34,10 @@ void a_start(void*);
 void a_stop(void*);
 
 void setup() {
-    delay(5000);
     Serial.begin(115200); // Obvious debug data is obvious
 
     Wire.begin();
-    // Wire.setTimeout(50);
+    Wire.setTimeout(50);
     
     // Initialize scheduler
     sched = csch_create(1, millis, proc_buf, sizeof(proc_buf) / sizeof(*proc_buf));
@@ -101,7 +100,7 @@ void loop() {}
 
 int16_t desired_rotation = 0;
 float system_out = 0;
-int16_t error;
+float error;
 
 void t_controller() {
     csch_cqueue(100); // Run as fast as possible
